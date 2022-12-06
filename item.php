@@ -10,13 +10,13 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/itemstyle.css">
 </head>
 
 <body>
     <div class="col-12 text-center">
 		<a class="blog-header-logo text-dark" href="#">
-			<img src="../../img/HOME/kasa.png" alt="" width="100" height="100"></img>
+			<img src="img/HOME/kasa.png" alt="" width="100" height="100"></img>
 		</a>
 	  </div>
 <header class="header-top">
@@ -27,15 +27,15 @@
 		  </a>
 	
 		  <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-			<li><a href="../../home.html" class="nav-link px-2 link-secondary">HOME</a></li>
-			<li><a href="../../brand/brand.html" class="nav-link px-2 link-dark">BRAND</a></li>
+			<li><a href="home.php" class="nav-link px-2 link-secondary">HOME</a></li>
+			<li><a href="brand.php" class="nav-link px-2 link-dark">BRAND</a></li>
 			<li><a href="../../category/category.html" class="nav-link px-2 link-dark">CATEGORY</a></li>
 			<li><a href="../../blog/bloghome.html" class="nav-link px-2 link-dark">BLOG</a></li>
 		  </ul>
 	
 		  <div class="col-md-3 text-end">
 			<a href="../../cart/cart.html"><i class="bi bi-cart4 text-dark" style="font-size: 1.5rem;"></i></a>
-			<a href="../../cart/buy.html"><i class="bi bi-person-circle text-dark" style="font-size: 1.5rem;"></i></a>
+			<a href="login.php"><i class="bi bi-person-circle text-dark" style="font-size: 1.5rem;"></i></a>
 		  </div>
 		</header>
 	  </div>
@@ -52,7 +52,7 @@
 ?>
 <div id="item" class="wrapper">
     <div class="item-image">
-    <?php echo "<img src=$row[item_image]>"?>;
+    <?php echo "<img src=$row[item_image]>"?>
     </div>
 
     <div class="item-info">
@@ -62,7 +62,7 @@
       </p>
 
       <p>
-        <?php echo "￥$row[item_money]";?>
+        <?php echo "￥".number_format($row['item_money']);?>
       </p>
       <table class="order-table">
         <thead>

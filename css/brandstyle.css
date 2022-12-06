@@ -1,0 +1,33 @@
+a.btn-border {
+    border: 2px solid #000;
+    border-radius: 0;
+    background: #fff;
+  }
+  
+  a.btn-border:hover {
+    color: #fff;
+    background: #000;
+  }
+
+  .item {
+    border-radius: 10px;
+    background: rgb(255, 254, 254);
+    padding: 15px;
+    margin: 5px;
+    text-align: center;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  @media ( min-width : 100px ){
+    .flexbox {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    }
+  .item {
+    width: 32%;
+  }
+}

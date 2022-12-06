@@ -46,19 +46,25 @@
 		  </a>
 	
 		  <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-			<li><a href="home.html" class="nav-link px-2 link-secondary">HOME</a></li>
-			<li><a href="brand/brand.html" class="nav-link px-2 link-dark">BRAND</a></li>
+			<li><a href="home.php" class="nav-link px-2 link-secondary">HOME</a></li>
+			<li><a href="brand.php" class="nav-link px-2 link-dark">BRAND</a></li>
 			<li><a href="category/category.html" class="nav-link px-2 link-dark">CATEGORY</a></li>
 			<li><a href="blog/bloghome.html" class="nav-link px-2 link-dark">BLOG</a></li>
 		  </ul>
 	
 		  <div class="col-md-3 text-end">
 			<a href="cart/cart.html"><i class="bi bi-cart4 text-dark" style="font-size: 1.5rem;"></i></a>
-			<a href="cart/buy.html"><i class="bi bi-person-circle text-dark" style="font-size: 1.5rem;"></i></a>
+			<a href="login.php"><i class="bi bi-person-circle text-dark" style="font-size: 1.5rem;"></i></a>
 		  </div>
 		</header>
 	  </div>
 </header>
+<div name="maindiv" class="container-fluids">
+	<div class="bg-img p-5">
+		<div class="container">
+			<img src="img/HOME/home.png" class="img-fluid">
+		</div>
+	</div>
 <div class="border col-12 text-center">
 	<br>
 	<h2>NEW ARRIVALS</h2>
@@ -68,7 +74,7 @@
 <?php
 	$pdo = new PDO('mysql:host=localhost;dbname=teamadb;charset=utf8','webuser','abccsd2');
 
-	$sql = "SELECT * FROM items";
+	$sql = "SELECT * FROM items INNER JOIN brand WHERE items.brand_id = brand.brand_id ORDER BY item_insdate DESC LIMIT 0,8";
 	$ps = $pdo->prepare($sql);
 	$ps->execute();
 	foreach($ps->fetchAll() as $row){
@@ -79,69 +85,37 @@
 <input type="image" class="img-fluid" <?php echo "src=$row[item_image] width=380 height=480"?>><br>
 </form>
 <?php
+	echo "<p>$row[brand_name]</p>";
 	echo "<h6><p>$row[item_name]</p></h6>";
-	echo "￥$row[item_money]<br>";
+	echo "￥".number_format($row['item_money'])."<br>";
 ?>
 </div><?php } ?>
 
-
-<br>
-<br>
-<br>
 <div class="border col-12 text-center">
 	<br>
 	<h2>RECOMMEND ITEM</h2>
 </div>
 <br>
 <div class="row">
-    <div class="col-md-3 col-6 p-3">
-    <a href="category/TOPS/pinkbest.html"><img src="img/AKIEDA/akiedashoes.jpg" class="img-fluid"></a>
-	<h6><p class="text-justify text-center">IKEDA</p></h6>
-	<p class="text-justify text-center">pink best</p>
-	<p class="text-justify text-center">¥20,000</p>
-	</div>
-	<div class="col-md-3 col-6 p-3">
-	<a href="category/TOPS/beigebest.html"><img src="img/KANEKO/kanekopants2.jpg" class="img-fluid"></a>
-	<h6><p class="text-justify text-center">KANEKO</p></h6>
-	<p class="text-justify text-center">beige best</p>
-	<p class="text-justify text-center">¥20,000</p>
-	</div>
-	<div class="col-md-3 col-6 p-3">
-	<a href="category/TOPS/skybluebest.html"><img src="img/NAKAMURA/nakamurajacket.jpg" class="img-fluid"></a>
-	<h6><p class="text-justify text-center">AKIEDA</p></h6>
-	<p class="text-justify text-center">skyblue best</p>
-	<p class="text-justify text-center">¥20,000</p>
-	</div>
-	<div class="col-md-3 col-6 p-3">
-	<a href="category/TOPS/bluebest.html"><img src="img/NOMURA/nomurapants3.jpg" class="img-fluid"></a>
-	<h6><p class="text-justify text-center">NOMURA</p></h6>
-	<p class="text-justify text-center">blue best</p>
-	<p class="text-justify text-center">¥20,000</p>
-</div>
-<div class="row">
-    <div class="col-md-3 col-6 p-3">
-    <img src="img/KANEKO/kanekoscarf.jpg" class="img-fluid">
-	<h6><p class="text-justify text-center">NAKAMURA</p></h6>
-	<p class="text-justify text-center">skyblue coat</p>
-	<p class="text-justify text-center">¥30,000</p>
-	</div>
-	<div class="col-md-3 col-6 p-3">
-	<img src="img/NAKAGAWA/supernovapants.jpg" class="img-fluid">
-	<h6><p class="text-justify text-center">IKEDA</p></h6>
-	<p class="text-justify text-center">beige coat</p>
-	<p class="text-justify text-center">¥30,000</p>
-	</div>
-	<div class="col-md-3 col-6 p-3">
-	<img src="img/NAKAMURA/nakamuracardigan5.jpg" class="img-fluid">
-	<h6><p class="text-justify text-center">IKEDA</p></h6>
-	<p class="text-justify text-center">pink coat</p>
-	<p class="text-justify text-center">¥30,000</p>
-	</div>
-	<div class="col-md-3 col-6 p-3">
-	<img src="img/IKEDA/ikedaharfzip.jpg" class="img-fluid">
-	<h6><p class="text-justify text-center">IKEDA</p></h6>
-	<p class="text-justify text-center">red coat</p>
-	<p class="text-justify text-center">¥30,000</p>
+<?php
+	$pdo = new PDO('mysql:host=localhost;dbname=teamadb;charset=utf8','webuser','abccsd2');
+
+	$sql = "SELECT * FROM items INNER JOIN brand WHERE items.brand_id = brand.brand_id ORDER BY RAND() LIMIT 0,8";
+	$ps = $pdo->prepare($sql);
+	$ps->execute();
+	foreach($ps->fetchAll() as $row){
+?>
+<div class="col-md-3 col-6" style="text-align: center;">
+<form action="item.php" method="post">
+<input type="hidden" name="id" value=<?php echo $row['item_id']?>>
+<input type="image" class="img-fluid" <?php echo "src=$row[item_image] width=380 height=480"?>><br>
+</form>
+<?php
+	echo "<p>$row[brand_name]</p>";
+	echo "<h6><p>$row[item_name]</p></h6>";
+	echo "￥".number_format($row['item_money'])."<br>";
+?>
+</div><?php } ?>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
 </body>

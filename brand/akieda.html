@@ -40,7 +40,15 @@
 	  </div>
 </header>
 	<div class="col-12 text-center">
-		<p><h2>AKIEDA</h2></p>
+		<?php 
+		$pdo = new PDO('mysql:host=localhost;dbname=teamadb;charset=utf8','webuser','abccsd2');
+
+		$sql = "SELECT * FROM brand LIMIT 0,3";
+		$ps = $pdo->prepare($sql);
+		$ps->execute();
+		foreach($ps->fetchAll() as $row){
+		?>
+		<p><h2></h2></p>
 		<br>
 		<p>
 			2020年秋冬シーズンよりイブキ(IBUKI)から、アキエダ(AKIEDA)にブランド名変更。<br><br>
