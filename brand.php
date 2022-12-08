@@ -35,13 +35,13 @@
 		  <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
 			<li><a href="home.php" class="nav-link px-2 link-secondary">HOME</a></li>
 			<li><a href="brand.php" class="nav-link px-2 link-dark">BRAND</a></li>
-			<li><a href="../category/category.html" class="nav-link px-2 link-dark">CATEGORY</a></li>
+			<li><a href="category.php" class="nav-link px-2 link-dark">CATEGORY</a></li>
 			<li><a href="../blog/bloghome.html" class="nav-link px-2 link-dark">BLOG</a></li>
 		  </ul>
 	
 		  <div class="col-md-3 text-end">
 			<a href="../cart/cart.html"><i class="bi bi-cart4 text-dark" style="font-size: 1.5rem;"></i></a>
-			<a href="../cart/buy.html"><i class="bi bi-person-circle text-dark" style="font-size: 1.5rem;"></i></a>
+			<a href="login.php"><i class="bi bi-person-circle text-dark" style="font-size: 1.5rem;"></i></a>
 		  </div>
 		</header>
 	  </div>
@@ -60,7 +60,7 @@
 ?>
 	<div class="col-md-4 col-sm-12">	
 	<form action="brand_search.php" method="post">
-	<input type="hidden" name="id" value=<?php echo $row['brand_id']?>>
+	<input type="hidden" name="brandid" value=<?php echo $row['brand_id']?>>
 	<input type="image" class="img-fluid" <?php echo "src=$row[brand_image]"?>><br>
 	</form>
 	</div>

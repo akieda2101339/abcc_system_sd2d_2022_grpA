@@ -45,7 +45,7 @@
    
     $sql = "SELECT * FROM items WHERE item_id=?";
     $ps = $pdo->prepare($sql);
-    $ps->bindValue(1,$_POST['id'],PDO::PARAM_INT);
+    $ps->bindValue(1,$_POST['itemid'],PDO::PARAM_INT);
     $ps->execute();
     foreach($ps->fetchAll() as $row){
     }

@@ -63,7 +63,7 @@ if(isset($_SESSION['userid'])==true){
       <div class="row">
         <div class="col-md-12 mt-3">
             <div class="d-grid gap-2">
-              <input type="submit" class="btn btn-dark btn-lg text-white" value="ログイン">
+              <input type="submit" class="btn btn-dark btn-lg text-white" onclick="OnClick()" value="ログイン">
             </div>
         </div>
     </div>
