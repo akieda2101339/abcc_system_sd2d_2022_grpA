@@ -65,11 +65,17 @@
 		<?php
 		$pdo = new PDO('mysql:host=localhost;dbname=teamadb;charset=utf8','webuser','abccsd2');
 
-		$sql = "SELECT DISTINCT items.*, brand.brand_name FROM items INNER JOIN brand ON items.brand_id = brand.brand_id WHERE category_id=?";
-		$ps = $pdo->prepare($sql);
-		$ps->bindValue(1,$_POST['categoryid'],PDO::PARAM_INT);
-		$ps->execute();
-		foreach($ps->fetchAll() as $row){
+		if($_POST['categoryid'] == 0){
+			$sql = "SELECT DISTINCT items.*, brand.brand_name FROM items INNER JOIN brand ON items.brand_id = brand.brand_id";
+			$ps = $pdo->prepare($sql);
+			$ps->execute();
+		}else{
+			$sql = "SELECT DISTINCT items.*, brand.brand_name FROM items INNER JOIN brand ON items.brand_id = brand.brand_id WHERE category_id=?";
+			$ps = $pdo->prepare($sql);
+			$ps->bindValue(1,$_POST['categoryid'],PDO::PARAM_INT);
+			$ps->execute();
+		}
+			foreach($ps->fetchAll() as $row){
 		?>
 		<div class="col-md-3 col-6 p-3" style="text-align: center;">
 		<form action="item.php" method="post">

@@ -10,5 +10,5 @@ $ps->bindValue(4,$_POST['mail'],PDO::PARAM_STR);
 $ps->bindValue(5,$_POST['pass'],PDO::PARAM_STR);
 $ps->execute();
 
-header('Location: login_test.php');
+header('Location: login.php');
 ?>

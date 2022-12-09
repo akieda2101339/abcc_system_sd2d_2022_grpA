@@ -41,7 +41,7 @@
 	
 		  <div class="col-md-3 text-end">
 			<a href="../cart/cart.html"><i class="bi bi-cart4 text-dark" style="font-size: 1.5rem;"></i></a>
-			<a href="login.phps"><i class="bi bi-person-circle text-dark" style="font-size: 1.5rem;"></i></a>
+			<a href="login.php"><i class="bi bi-person-circle text-dark" style="font-size: 1.5rem;"></i></a>
 		  </div>
 		</header>
 	  </div>
