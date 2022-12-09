@@ -43,7 +43,7 @@
 <?php
     $pdo = new PDO('mysql:host=localhost;dbname=teamadb;charset=utf8','webuser','abccsd2');
    
-    $sql = "SELECT * FROM items WHERE item_id=?";
+    $sql = "SELECT * FROM items INNER JOIN inventories ON items.item_id = inventories.item_id WHERE item_id=?";
     $ps = $pdo->prepare($sql);
     $ps->bindValue(1,$_POST['itemid'],PDO::PARAM_INT);
     $ps->execute();
@@ -64,6 +64,14 @@
       <p>
         <?php echo "￥".number_format($row['item_money']);?>
       </p>
+      <?php
+        $inventory = "SELECT * FROM inventories WHERE item_id=?";
+        $ps = $pdo->prepare($sql);
+        $ps->bindValue(1,$_POST['itemid'],PDO::PARAM_INT);
+        $ps->execute();
+        foreach($ps->fetchAll() as $row){
+        }
+      ?>
       <table class="order-table">
         <thead>
           <tr>
@@ -77,11 +85,13 @@
             <td>GRAY STRIPE</td>
             <td>S</td>
             <td>
+              <form action="cartins.php">
               <select name="quantity_s">
+                <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
-                <option value="3">3</option>
               </select>
+              </form>
             </td>
           </tr>
           <tr>
@@ -89,9 +99,9 @@
             <td>M</td>
             <td>
               <select name="quantity_s">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+                <option value="1">0</option>
+                <option value="2">1</option>
+                <option value="3">2</option>
               </select>
             </td>
           </tr>
