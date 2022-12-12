@@ -6,9 +6,10 @@ table.brwsr2 {
   border-bottom: solid 1px #666;
   border-collapse: separate;
   border-spacing: 0 10px;
-  }
+  display: inline-block;
+}
   
-  table.brwsr2 th {
+table.brwsr2 th {
   vertical-align: middle;
   height: 60px;
   width: 324px;
@@ -17,7 +18,7 @@ table.brwsr2 {
   color: #333;
   font-size: 16px;
   font-weight: bold;
-  }
+}
   
   table.brwsr2 td.data {
   padding: 0;

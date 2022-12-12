@@ -20,14 +20,16 @@
   <div class="offset-md-3 col-md-6 container">
     <div class="text-center mb-3">
       <h1>アカウント</h1>
-      <h5>登録情報</h5>
+      <h5 class="text-left">登録情報</h5>
+	  <div class="text-left">
       <?php
       session_start();
       echo "$_SESSION[familyname]　$_SESSION[firstname]<br>";
       echo "$_SESSION[address]";
       ?>
+	  </div>
       <h5>購入履歴<h5>
-      <table class="brwsr2">
+      <table class="brwsr2" style="float: left;">
 		    <tbody>
 		      <tr>
 		        <td class="data fst">
