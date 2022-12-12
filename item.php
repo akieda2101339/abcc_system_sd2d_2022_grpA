@@ -14,40 +14,16 @@
 </head>
 
 <body>
-    <div class="col-12 text-center">
-		<a class="blog-header-logo text-dark" href="#">
-			<img src="img/HOME/kasa.png" alt="" width="100" height="100"></img>
-		</a>
-	  </div>
-<header class="header-top">
-	<div class="container">
-		<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-		  <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-			<svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
-		  </a>
-	
-		  <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-			<li><a href="home.php" class="nav-link px-2 link-secondary">HOME</a></li>
-			<li><a href="brand.php" class="nav-link px-2 link-dark">BRAND</a></li>
-			<li><a href="../../category/category.html" class="nav-link px-2 link-dark">CATEGORY</a></li>
-			<li><a href="../../blog/bloghome.html" class="nav-link px-2 link-dark">BLOG</a></li>
-		  </ul>
-	
-		  <div class="col-md-3 text-end">
-			<a href="../../cart/cart.html"><i class="bi bi-cart4 text-dark" style="font-size: 1.5rem;"></i></a>
-			<a href="login.php"><i class="bi bi-person-circle text-dark" style="font-size: 1.5rem;"></i></a>
-		  </div>
-		</header>
-	  </div>
-</header>
+<?php require_once 'header.php'?>
 <?php
     $pdo = new PDO('mysql:host=localhost;dbname=teamadb;charset=utf8','webuser','abccsd2');
    
-    $sql = "SELECT * FROM items INNER JOIN inventories ON items.item_id = inventories.item_id WHERE item_id=?";
+    $sql = "SELECT * FROM items WHERE item_id=?";
     $ps = $pdo->prepare($sql);
     $ps->bindValue(1,$_POST['itemid'],PDO::PARAM_INT);
     $ps->execute();
     foreach($ps->fetchAll() as $row){
+      $itemid = $row['item_id'];
     }
 ?>
 <div id="item" class="wrapper">
@@ -67,7 +43,7 @@
       <?php
         $inventory = "SELECT * FROM inventories WHERE item_id=?";
         $ps = $pdo->prepare($sql);
-        $ps->bindValue(1,$_POST['itemid'],PDO::PARAM_INT);
+        $ps->bindValue(1,$itemid,PDO::PARAM_INT);
         $ps->execute();
         foreach($ps->fetchAll() as $row){
         }
@@ -83,33 +59,26 @@
         <tbody>
           <tr>
             <td>GRAY STRIPE</td>
-            <td>S</td>
             <td>
-              <form action="cartins.php">
-              <select name="quantity_s">
-                <option value="0">0</option>
+            <form action="cartins.php" method="post">
+              <select name="size">
+                <option value="S">S</option>
+                <option value="M">M</option>
+              </select>
+            </td>
+            <td>
+              <select name="quantity">
                 <option value="1">1</option>
                 <option value="2">2</option>
-              </select>
-              </form>
-            </td>
-          </tr>
-          <tr>
-            <td>GRAY STRIPE</td>
-            <td>M</td>
-            <td>
-              <select name="quantity_s">
-                <option value="1">0</option>
-                <option value="2">1</option>
-                <option value="3">2</option>
+                <option value="3">3</option>
               </select>
             </td>
           </tr>
         </tbody>
       </table>
-
-      <a class="cart-btn" href="../../cart/buy.html">ADD TO CART</a>
-
+      <input type="hidden" name="itemid" value=<?php echo $itemid?>>
+      <input type="submit" class="cart-btn" value="ADD TO CART">
+      </form>
       <table class="size-table">
         <thead>
           <tr>

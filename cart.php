@@ -13,106 +13,95 @@
 </head>
 
 <body>
-    <div class="col-12 text-center">
-		<a class="blog-header-logo text-dark" href="#">
-			<img src="../img/HOME/kasa.png" alt="" width="100" height="100"></img>
-		</a>
-	  </div>
-<header class="header-top">
-	<div class="container">
-		<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-		  <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-			<svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
-		  </a>
-	
-		  <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-			<li><a href="../home.html" class="nav-link px-2 link-secondary">HOME</a></li>
-			<li><a href="../brand/brand.html" class="nav-link px-2 link-dark">BRAND</a></li>
-			<li><a href="../category/category.html" class="nav-link px-2 link-dark">CATEGORY</a></li>
-			<li><a href="../blog/bloghome.html" class="nav-link px-2 link-dark">BLOG</a></li>
-		  </ul>
-	
-		  <div class="col-md-3 text-end">
-			<a href="cart.html"><i class="bi bi-cart4 text-dark" style="font-size: 1.5rem;"></i></a>
-			<a href="buy.html"><i class="bi bi-person-circle text-dark" style="font-size: 1.5rem;"></i></a>
-		  </div>
-		</header>
-	  </div>
-</header>
+<?php require_once 'header.php'?>
+<?php
+session_start();
+if(!isset($_SESSION['userid'])){
+	header('Location: login.php');
+}
+?>
 <main>
-	<div class="text-center"><h1>カート</h1></div>
+<div class="text-center"><h1>カート</h1></div>
 	<div class="header">
-	  <div class="container">
-		<div class="border-bottom">
-		  <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
-	  
-			<ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-3">
-			  <div class="col-1">
-				<li>　商品</li>
-			  </div>
-			  <div class="col-1"></div>
-			  <div class="col-1"></div>
-			  <div class="col-1">
-				<li>　　カラー</li>
-			  </div>
-			  <div class="col-1">
-				<li> 　　サイズ</li>
-			  </div>
-			  <div class="col-1">
-				<li>　　数量</li>
-			  </div>
-			  <div class="col-1">
-				<li>　　　値段</li>
-			  </div>
-			  <div class="col-1"></div>
-			  <div class="col-1">
-				<li>　　　合計</li>
-			  </div>
-			  <div class="col-1"></div>
-			</ul>
-		</div>
-	  </div>
+		<div class="container">
+			<div class="border-bottom">
+				<svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+				<ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-3">
+			  	<div class="col-1">
+					<li>商品</li>
+			  	</div>
+			  	<div class="col-1"></div>
+			  	<div class="col-1"></div>
+			  	<div class="col-1">
+					<li>サイズ</li>
+			  	</div>
+			  	<div class="col-1">
+					<li>数量</li>
+			  	</div>
+			  	<div class="col-1">
+					<li>値段</li>
+			  	</div>
+			  	<div class="col-1"></div>
+			  	<div class="col-1">
+				<li>合計</li>
+			  	</div>
+			  	<div class="col-1"></div>
+				</ul>
+			</div>
+	  	</div>
 	</div>
+	<?php
+ 		$pdo = new PDO('mysql:host=localhost;dbname=teamadb;charset=utf8','webuser','abccsd2');
+		$sql = "SELECT DISTINCT * FROM cart INNER JOIN items ON cart.item_id = items.item_id WHERE user_id=?";	
+		$ps = $pdo->prepare($sql);
+		$ps->bindValue(1,$_SESSION['userid'],PDO::PARAM_INT);
+		$ps->execute();
+		$Total = 0;
+		foreach($ps->fetchAll() as $row){
+	?>
 	<div class="body">
-	  <div class="container">
-		<div class="border-bottom">
-		  <div class="row">
+		<div class="container">
+			<div class="border-bottom">
+		  	<div class="row">
 			<div class="col-1"></div>
 			<div class="col-1">
-			  <img src="../img/AKIEDA/akiedabags.jpg" width="90" height="124">
+				<form action="item.php" method="post">
+				<input type="hidden" name="itemid" value=<?php echo $row['item_id']?>>
+				<input type="image" class="img-fluid" <?php echo "src=$row[item_image] width=90 height=124"?>>
+				</form>
 			</div>
 			<div class="col-2" style="padding: 45px">
-			  AKIEDA BAG
+			  <?php echo $row['item_name']?>
 			</div>
 			<div class="col-1" style="padding: 45px">
-			  Black
+			  <?php echo $row['cart_itemsize']?>
 			</div>
 			<div class="col-1" style="padding: 45px">
-			  Free
+			  <?php echo $row['cart_sum']?>
 			</div>
 			<div class="col-1" style="padding: 45px">
-			  1
-			</div>
-			<div class="col-1" style="padding: 45px">
-			  ¥10,000
+			<?php echo "￥".number_format($row['item_money']);?>
 			</div>
 			<div class="col-1"></div>
 			<div class="col-1" style="padding: 45px">
-			  ¥10,000
+				<?php echo "￥".number_format($row['item_money']*$row['cart_sum']);
+				$Total += $row['item_money']*$row['cart_sum']?>
 			</div>
 			<div class="col-1"></div>
 			<div class="col-1"></div>
-		  </div>
 		</div>
+		</div>
+		<?php } ?>
+		<br>
 			<div class="text-end">
-			  <p>¥10,000</p>
+				<p><?php echo "￥".number_format($Total)?></p>
 			</div>
 			<div class="text-end">
-			  <a href="cart2.html"><input type="submit" value="決済する"></a>
+				<form action="buyins.php">
+			  	<input type="submit" value="決済する"></a>
 			</div>
 	  </div>
 	</div>
-	
   </main>
   
 </body>
