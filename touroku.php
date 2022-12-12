@@ -33,13 +33,11 @@
             <div class="row">
                 <div class="col-mad-12 mt-3">
                     Email<input type="text" class="form-control" name="mail">
-                    <div class="alert-danger text-center" id="mailerror">
                 </div>
             </div>
             <div class="row">
                 <div class="col-mad-12 mt-3">
                     パスワード<input type="text" class="form-control" name="pass">
-                    <div class="alert-danger text-center" id="passerror">
                 </div>
             </div>
             <div class="row">
