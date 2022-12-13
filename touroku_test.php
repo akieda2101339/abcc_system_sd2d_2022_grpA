@@ -13,7 +13,7 @@
 
 <body>
 <?php require_once 'header.php'?>
-<form action="userins.php" method="post" name="userins" onsubmit="return check()">
+<form action="post.php" method="post" name="userins" onsubmit="return check()">
     <div class="row mt-5">
         <div class="offset-md-3 col-md-6">
             <h1 class="text-center mb-3">新規会員登録</h1>
@@ -33,11 +33,13 @@
             <div class="row">
                 <div class="col-mad-12 mt-3">
                     Email<input type="text" class="form-control" name="mail">
+                    <div class="alert-danger text-center" id="mailerror"></div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-mad-12 mt-3">
                     パスワード<input type="text" class="form-control" name="pass">
+                    <div class="alert-danger text-center" id="passerror"></div>
                 </div>
             </div>
             <div class="row">
@@ -56,19 +58,30 @@ function check(){
     let mail = document.userins.mail.value;
     let pass = document.userins.pass.value;
     let isSuccess = true;
+    document.getElementById("mailerror").innerHTML = "";
+    ocument.getElementById("passerror").innerHTML = "";
 
     if(mailPattern.test(mail) == false && pass.length < 6){
-        alert('メールアドレス、パスワードの形式が不正です。\nパスワードは6文字以上の必要があります');
+        let mailerrorTag = document.createElement("p");
+        let passerrorTag = document.createElement("p");
+        mailerrorTag.textContent = "メールアドレスの形式が不正です。";
+        passerrorTag.textContent = "パスワードは6文字以上の必要があります";
+        document.getElementById("mailerror").appendChild(mailerrorTag);
+        document.getElementById("passerror").appendChild(passerrorTag);
         isSuccess = false;
         return false;
     }
     else if(mailPattern.test(mail) == false){
-            alert('メールアドレスの形式が不正です。');
-            isSuccess = false;
-            return false;
+        let mailerrorTag = document.createElement("p");
+        mailerrorTag.textContent = "メールアドレスの形式が不正です。";
+        document.getElementById("mailerror").appendChild(mailerrorTag);
+        isSuccess = false;
+        return false;
     }
     else if(pass.length < 6){
-        alert('パスワードは6文字以上の必要があります');
+        let passerrorTag = document.createElement("p");
+        passerrorTag.textContent = "パスワードは6文字以上の必要があります";
+        document.getElementById("passerror").appendChild(passerrorTag);
         isSuccess = false;
         return false;
     }
@@ -76,6 +89,7 @@ function check(){
         return true;
     }
 };
+check();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
