@@ -49,7 +49,8 @@
 <?php
 	$pdo = new PDO('mysql:host=localhost;dbname=teamadb;charset=utf8','webuser','abccsd2');
 
-	$sql = "SELECT * FROM items INNER JOIN brand WHERE items.brand_id = brand.brand_id ORDER BY item_insdate DESC LIMIT 0,8";
+	$sql = "SELECT * FROM items INNER JOIN brand INNER JOIN inventories 
+			WHERE items.brand_id = brand.brand_id AND items.item_id = inventories.item_id AND inventories.inventory_itemsize='S' ORDER BY item_insdate DESC LIMIT 0,8";
 	$ps = $pdo->prepare($sql);
 	$ps->execute();
 	foreach($ps->fetchAll() as $row){

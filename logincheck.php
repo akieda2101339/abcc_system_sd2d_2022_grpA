@@ -12,10 +12,14 @@ foreach($ps->fetchAll() as $row){
     $_SESSION['familyname'] = $row['user_familyname'];
     $_SESSION['firstname'] = $row['user_firstname'];
     $_SESSION['address'] = $row['user_address'];
+    $_SESSION['mail'] = $row['user_mail'];
 }
 if(isset($_SESSION['userid'])){
     header('Location: acount.php');
 }else{
-    header('Location: login.php');
-}
 ?>
+<script type='text/javascript'>
+    alert('メールアドレス、もしくはパスワードが違います');
+    location.href = 'login.php'
+</script>
+<?php } ?>

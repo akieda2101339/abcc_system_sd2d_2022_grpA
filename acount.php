@@ -15,26 +15,62 @@
 </head>
 
 <body>
-<?php require_once 'header.php'?>
+<?php require_once 'header.php';
+session_start();?>
 <div class="row mt-5">
   <div class="offset-md-3 col-md-6 container">
     <div class="text-center mb-3">
-      <h1>アカウント</h1>
-      <h5 class="text-left">登録情報</h5>
-	  <div class="text-left">
-      <?php
-      session_start();
-      echo "$_SESSION[familyname]　$_SESSION[firstname]<br>";
-      echo "$_SESSION[address]";
-      ?>
-	  </div>
-      <h5>購入履歴<h5>
+    <h1>アカウント</h1>
+	<div class="row">
+    <h5 class="text-left">登録情報</h5><br>
+	<table class="brwsr2">
+		<tbody>
+			<tr>
+				<td class="data fst">
+            		名前
+        		</td>
+				<td class="data">
+					住所
+				</td>
+				<td class="data">
+		    		メールアドレス
+				</td>
+			</tr>
+			<td class="bar" colspan="3"></td>
+			<tr>
+				<td class="data fst">
+					<?php echo "$_SESSION[familyname]　$_SESSION[firstname]"?>
+				</td>
+				<td class="data">
+					<?php echo "$_SESSION[address]"?>
+				</td>
+				<td class="data">
+					<?php echo "$_SESSION[mail]"?>
+				</td>
+			</tr>
+	</table>
+	<div></div>
+	<div></div>
+	<?php
+
+	$pdo = new PDO('mysql:host=localhost;dbname=teamadb;charset=utf8','webuser','abccsd2');
+	$sql = "SELECT * FROM buys WHERE user_id=?";
+	$ps = $pdo->prepare($sql);
+	$ps->bindValue(1,$_SESSION['userid'],PDO::PARAM_INT);
+	$ps->execute();
+	foreach($ps->fetchAll() as $row){
+	}
+	if(empty($row)){
+		echo "<br><h3>購入履歴がありません</h3>";
+	}else{
+    ?>
+      <h5 class="pt-5">購入履歴</h5><br>
       <table class="brwsr2" style="float: left;">
 		    <tbody>
 		      <tr>
 		        <td class="data fst">
-              商品
-            </td>
+              		商品
+            	</td>
 		        <td class="data">
 			        商品名
 		        </td>
@@ -53,7 +89,6 @@
 		      <td class="bar" colspan="6"></td>
 		    </tr>
 		  <?php
- 			  $pdo = new PDO('mysql:host=localhost;dbname=teamadb;charset=utf8','webuser','abccsd2');
 			  $sql = "SELECT DISTINCT * FROM buys INNER JOIN items ON buys.item_id = items.item_id WHERE user_id=?";	
 			  $ps = $pdo->prepare($sql);
 			  $ps->bindValue(1,$_SESSION['userid'],PDO::PARAM_INT);
@@ -85,6 +120,7 @@
 		</tbody>
 		</table>
 		<br>
+		<?php } ?>
 </div>
 
   <form action="logout.php" method="post">

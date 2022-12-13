@@ -9,7 +9,7 @@
         $ps->bindValue(3,$_POST['size'],PDO::PARAM_STR);
         $ps->bindValue(4,$_POST['quantity'],PDO::PARAM_INT);
         $ps->execute();
-        header('Location: item.php');
+        header('Location: cart.php');
     }else{
         header('Location: login.php');
     }

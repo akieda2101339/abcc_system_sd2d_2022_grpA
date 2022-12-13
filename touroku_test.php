@@ -59,7 +59,7 @@ function check(){
     let pass = document.userins.pass.value;
     let isSuccess = true;
     document.getElementById("mailerror").innerHTML = "";
-    ocument.getElementById("passerror").innerHTML = "";
+    document.getElementById("passerror").innerHTML = "";
 
     if(mailPattern.test(mail) == false && pass.length < 6){
         let mailerrorTag = document.createElement("p");
