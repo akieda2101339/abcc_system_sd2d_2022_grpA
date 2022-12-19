@@ -1,22 +1,21 @@
 table.brwsr2 {
+  margin: 0 auto;
+  width: auto;
   border: none;
-  border-top: solid 1px #666;
-  border-bottom: solid 1px #666;
-  border-collapse: collapse;
-  border-spacing: 0 10px;
-  display: inline-block;
-}
+  border-collapse: separate;
+  border-spacing: 0;
+  border-bottom: solid 1px #333;
+  }
   
-table.brwsr2 th {
+  table.brwsr2 th {
   vertical-align: middle;
   height: 60px;
   width: 324px;
   margin: 0;
   text-align: center;
   color: #333;
-  font-size: 16px;
-  font-weight: bold;
-}
+  border-bottom: solid 1px #333;
+  }
   
   table.brwsr2 td.data {
   padding: 0;
@@ -31,6 +30,7 @@ table.brwsr2 th {
   vertical-align: middle;
   white-space: nowrap;
   overflow: hidden;
+  border-bottom: solid 1px #333;
   }
   
   table.brwsr2 td:fst-child {
@@ -39,15 +39,7 @@ table.brwsr2 th {
   }
   
   table.brwsr2 td.bar {
-  height: 100%;
+  height: 1px;
   width: 100%;
-  border-bottom: solid 1px #34495e;
-  }
-
-  .userdata{
-    width: 500px;
-  }
-
-  table.usertable{
-    text-align: center;
+  border-bottom: solid 1px#666;
   }

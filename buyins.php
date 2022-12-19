@@ -13,13 +13,12 @@ foreach($ps->fetchAll() as $row){
     $ps->bindValue(3,$row['cart_itemsize'],PDO::PARAM_STR);
     $ps->bindValue(4,$row['cart_sum'],PDO::PARAM_STR);
     $ps->execute();
-}
-$inventorycheck1 = "SELECT * FROM inventories WHERE item_id=? AND inventory_itemsize=?";
-$ps = $pdo->prepare($inventorycheck1);
-$ps->bindValue(1,$row['item_id'],PDO::PARAM_INT);
-$ps->bindValue(2,$row['cart_itemsize'],PDO::PARAM_INT);
-$ps->execute();
-foreach($ps->fetchAll() as $inventory){
+    $inventorycheck1 = "SELECT * FROM inventories WHERE item_id=? AND inventory_itemsize=?";
+    $ps = $pdo->prepare($inventorycheck1);
+    $ps->bindValue(1,$row['item_id'],PDO::PARAM_INT);
+    $ps->bindValue(2,$row['cart_itemsize'],PDO::PARAM_STR);
+    $ps->execute();
+    $inventory = $ps->fetch();
     $inventorycheck2 = "UPDATE inventories SET inventory_sum=? WHERE item_id=? AND inventory_itemsize=?";
     $ps = $pdo->prepare($inventorycheck2);
     $ps->bindValue(1,$inventory['inventory_sum'] - $row['cart_sum'],PDO::PARAM_INT);

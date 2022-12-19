@@ -37,7 +37,7 @@
             </div>
             <div class="row">
                 <div class="col-mad-12 mt-3">
-                    パスワード<input type="text" class="form-control" name="pass">
+                    パスワード<input type="password" class="form-control" name="pass">
                 </div>
             </div>
             <div class="row">

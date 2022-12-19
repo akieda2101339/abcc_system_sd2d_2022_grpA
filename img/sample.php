@@ -82,9 +82,9 @@
 	
 		  <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
 			<li><a href="home.php" class="nav-link px-2 link-secondary">HOME</a></li>
-			<li><a href="brand/brand.html" class="nav-link px-2 link-dark">BRAND</a></li>
+			<li><a href="brand.php" class="nav-link px-2 link-dark">BRAND</a></li>
 			<li><a href="category.php" class="nav-link px-2 link-dark">CATEGORY</a></li>
-			<li><a href="blog/bloghome.html" class="nav-link px-2 link-dark">BLOG</a></li>
+			<li><a href="blog.html" class="nav-link px-2 link-dark">BLOG</a></li>
 		  </ul>
 	
 		  <div class="col-md-3 text-end">

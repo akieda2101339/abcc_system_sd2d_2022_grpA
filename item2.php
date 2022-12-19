@@ -61,108 +61,33 @@
       <table class="order-table">
         <thead>
           <tr>
-            <th class="color">size</th>
-            <th class="size">quantity</th>
-            <th class="quantity">cart</th>
+            <th class="color">Color</th>
+            <th class="size">Size</th>
+            <th class="quantity">quantity</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-          <form action="cartins.php" method="post">
-          <td>
-            <input type="hidden" name="itemsize" value="S">S
-          </td>
-          <td>
-          <?php
-          switch($S_inbentory['inventory_sum']){
-            case 3:?>
-            <select name="quantity">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-            </select>
-          <?php break;?>
-          <?php
-            case 2:?>
-            <select name="quantity">
-              <option value="1">1</option>
-              <option value="2">2</option>
-            </select>
-          <?php break;?>
-          <?php
-            case 1:?>
-            <select name="quantity">
-              <option value="1">1</option>
-            </select>
-          <?php break;?>
-          <?php
-            default:?>
-            <select name="quantity">
-              <option value="-">-</option>
-            </select>
-          <?php } ?>
-          </td>
-          <td>
-          <?php
-          if($S_inbentory['inventory_sum'] == 0){
-            echo "SOLD OUT";
-          }else{
-          ?>
-          <input type="hidden" name="itemid" value=<?php echo $itemid?>>
-          <input class="btn btn-secondary" type="submit" value="ADD TO CART">
-          </form>
-          <?php } ?>
-          </td>
-          </tr>
-          <tr>
-          <form action="cartins.php" method="post">
-          <td>
-            <input type="hidden" name="itemsize" value="M">M
-          </td>
-          <td>
-          <?php
-          switch($M_inbentory['inventory_sum']){
-            case 3:?>
-            <select name="quantity">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-            </select>
-          <?php break;?>
-          <?php
-            case 2:?>
-            <select name="quantity">
-              <option value="1">1</option>
-              <option value="2">2</option>
-            </select>
-          <?php break;?>
-          <?php
-            case 1:?>
-            <select name="quantity">
-              <option value="1">1</option>
-            </select>
-          <?php break;?>
-          <?php
-            default:?>
-            <select name="quantity">
-              <option value="-">-</option>
-            </select>
-          <?php } ?>
-          </td>
-          <td>
-          <?php
-          if($M_inbentory['inventory_sum'] == 0){
-            echo "SOLD OUT";
-          }else{
-          ?>
-          <input type="hidden" name="itemid" value=<?php echo $itemid?>>
-          <input class="btn btn-secondary" type="submit" value="ADD TO CART">
-          </form>
-          <?php } ?>
-          </td>
+            <td>GRAY STRIPE</td>
+            <td>
+            <form action="cartins.php" method="post">
+              <select name="size">
+                <option value="S">S</option>
+                <option value="M">M</option>
+              </select>
+            </td>
+            <td>
+              <select name="quantity">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </td>
           </tr>
         </tbody>
       </table>
+      <input type="hidden" name="itemid" value=<?php echo $itemid?>>
+      <input type="submit" class="cart-btn" value="ADD TO CART">
       </form>
       <table class="size-table">
         <thead>

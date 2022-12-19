@@ -6,7 +6,7 @@
         $ps = $pdo->prepare($sql);
         $ps->bindValue(1,$_SESSION['userid'],PDO::PARAM_INT);
         $ps->bindValue(2,$_POST['itemid'],PDO::PARAM_INT);
-        $ps->bindValue(3,$_POST['size'],PDO::PARAM_STR);
+        $ps->bindValue(3,$_POST['itemsize'],PDO::PARAM_STR);
         $ps->bindValue(4,$_POST['quantity'],PDO::PARAM_INT);
         $ps->execute();
         header('Location: cart.php');
